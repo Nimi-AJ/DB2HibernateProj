@@ -20,7 +20,7 @@ public class Department {
     private String jobName;
 
     @Column(name = "budget")
-    private String budget;
+    private int budget;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "departmentId")
     private List<Employee> employees = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Department {
         this.jobName = jobName;
     }
 
-    public void setBudget(String budget) {
+    public void setBudget(int budget) {
         this.budget = budget;
     }
 
@@ -53,7 +53,7 @@ public class Department {
         return jobName;
     }
 
-    public String getBudget() {
+    public int getBudget() {
         return budget;
     }
 

@@ -13,7 +13,7 @@ public interface EmployeeDTO {
 
     Integer getSalary();
 
-    Department getDepartmentId();
+    Integer getDepartmentId();
 
     String getDepartmentName();
 

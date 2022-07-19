@@ -10,7 +10,7 @@ public class IDepartmentSvc {
     @Autowired
     DepartmentDAO departmentDAO;
 
-    public void save(String departmentName, String jobName, String budget){
+    public void save(String departmentName, String jobName, int budget){
         Department department = new Department();
         department.setDepartmentName(departmentName);
         department.setJobName(jobName);

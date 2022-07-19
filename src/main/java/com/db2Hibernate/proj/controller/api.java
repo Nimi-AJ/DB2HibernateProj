@@ -3,18 +3,19 @@ package com.db2Hibernate.proj.controller;
 import com.db2Hibernate.proj.dto.EmployeeDTO;
 import com.db2Hibernate.proj.service.IDepartmentSvc;
 import com.db2Hibernate.proj.service.IEmployeeSvc;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RestController
+@RequestMapping("/")
 public class api {
     @Autowired
     IEmployeeSvc iEmployeeSvc;
@@ -23,9 +24,14 @@ public class api {
     IDepartmentSvc iDepartmentSvc;
 
     @PostMapping("employee")
-    public ResponseEntity<Map<String, Object>> saveEmployee(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName,@RequestParam(name = "age") String age,@RequestParam(name = "email") String email,@RequestParam(name = "salary") int salary, @RequestParam(name = "departmentId") int departmentId) {
+    public ResponseEntity<Map<String, Object>> saveEmployee(@RequestBody ObjectNode objectNode) {
         Map<String, Object> res = new HashMap<>();
-
+        String firstName = objectNode.get("firstName").asText();
+        String lastName = objectNode.get("lastName").asText();
+        String age = objectNode.get("age").asText();
+        String email = objectNode.get("email").asText();
+        int salary = objectNode.get("salary").asInt();
+        int departmentId = objectNode.get("departmentId").asInt();
         iEmployeeSvc.saveEmployee(firstName, lastName, age, email, salary, departmentId);
 
         //if user is empty ?
@@ -68,12 +74,15 @@ public class api {
     }
 
     @PostMapping("department")
-    public ResponseEntity<Map<String, Object>> saveDepartment(@RequestParam(name = "departmentName") String departmentName, @RequestParam(name = "jobName") String jobName, @RequestParam(name = "budget")  String budget) {
+    public ResponseEntity<Map<String, Object>> saveDepartment(@RequestBody ObjectNode objectNode ) {
         Map<String, Object> res = new HashMap<>();
+        String departmentName = objectNode.get("departmentName").asText();
+        String jobName = objectNode.get("jobName").asText();
+        int budget = objectNode.get("budget").asInt();
+
 
         iDepartmentSvc.save(departmentName, jobName, budget);
 
-        //if user is empty ?
         res.put("status", HttpStatus.OK.value());
         res.put("code", HttpStatus.OK);
 

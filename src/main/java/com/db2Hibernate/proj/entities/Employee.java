@@ -4,6 +4,8 @@ import javax.persistence.*;
 @Table(name = "employees")
 @Entity
 public class Employee {
+//    INSERT INTO department(list_name, created_at)
+//    VALUES('Monthly Digest', DEFAULT);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

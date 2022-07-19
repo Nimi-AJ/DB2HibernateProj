@@ -46,6 +46,7 @@ public class IEmployeeSvc {
         }
 
         employee.setDepartmentId(department);
+        employeeDAO.save(employee);
     }
 
     public boolean saveToFileEmployeesWithSalaryGreaterThan(int salary) throws IOException {
