@@ -1,26 +1,32 @@
 package com.db2Hibernate.proj.entities;
-
 import javax.persistence.*;
 
+@Table(name = "employees")
 @Entity
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "age")
     private String age;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "salary")
     private Integer salary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department departmentId;
 
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -46,7 +52,7 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

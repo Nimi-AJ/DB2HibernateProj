@@ -17,17 +17,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.ibm.db2:jcc'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.projectlombok:lombok'
-	implementation 'org.projectlombok:lombok'
+//	compileOnly 'org.projectlombok:lombok'
+//	annotationProcessor 'org.projectlombok:lombok'
+//	implementation 'org.projectlombok:lombok'
 }
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+//configurations {
+//	compileOnly {
+//		extendsFrom annotationProcessor
+//	}
+//}
 
 tasks.named('test') {
 	useJUnitPlatform()

@@ -5,29 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "department")
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String departmentName;
-    private String jobName;
-    private String budget;
+    @Column(name = "department_id")
     private Integer departmentId;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-    private List<Employee> employees = new ArrayList<>();
+    @Column(name = "department_name")
+    private String departmentName;
 
-    public void setId(Integer id){
-        this.id = id;
-    }
+    @Column(name = "job_name")
+    private String jobName;
+
+    @Column(name = "budget")
+    private String budget;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "departmentId")
+    private List<Employee> employees = new ArrayList<>();
 
     public void setDepartmentName(String departmentName){
         this.departmentName = departmentName;
-    }
-
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
     }
 
     public void setJobName(String jobName) {
@@ -40,10 +39,6 @@ public class Department {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
-    }
-
-    public Integer getId(){
-        return id;
     }
 
     public String getDepartmentName() {
