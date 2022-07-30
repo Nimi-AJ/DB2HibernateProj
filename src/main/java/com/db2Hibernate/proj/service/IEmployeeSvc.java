@@ -12,8 +12,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class IEmployeeSvc {
@@ -22,6 +21,9 @@ public class IEmployeeSvc {
 
     @Autowired
     DepartmentDAO departmentDAO;
+
+    @Autowired
+    WriteToFile writeToFile;
 
 
     //uses join & native query
@@ -73,6 +75,73 @@ public class IEmployeeSvc {
         {
             bw.close();
         }
+
+
+
+//        SSHClient client = new SSHClient();
+
+
         return saved;
+    }
+
+    public Boolean saveToFileEmployeesOrderedByDepartment() throws IOException {
+        List<EmployeeDTO> employees = employeeDAO.getAllEmployeesOrderByDepartment();
+
+        StringBuilder line = new StringBuilder();
+        int prevDepartmentId = 0;
+        Map<String, String> map = new HashMap<>();
+
+
+        List<String> departmentEmployees = new ArrayList<>();
+
+            EmployeeDTO prevEmployee = null;
+            Iterator<EmployeeDTO> employeeIt = employees.iterator();
+            while(employeeIt.hasNext()){
+
+                EmployeeDTO employee = employeeIt.next();
+
+                if((prevDepartmentId != employee.getDepartmentId()) && (prevDepartmentId != 0)){
+//                    map.put(prevEmployee.getDepartmentName(), departmentEmployees.toString());
+                    System.out.println(map);
+                    System.out.println("list" + departmentEmployees.toString());
+                    writeToFile.saveEmployeesToFile(prevEmployee, String.valueOf(line));
+
+                    //clear line, list and map
+                    line = new StringBuilder();
+//                    map.clear();
+                    departmentEmployees.clear();
+                }
+
+                line.append(employee.getFirstName()).append("|");
+                line.append(employee.getLastName()).append("|");
+                line.append(employee.getEmail()).append("|");
+                line.append(employee.getJobName()).append("|");
+                line.append(employee.getSalary()).append("|");
+                line.append(employee.getDepartmentName()).append("|");
+                line.append(employee.getDepartmentId()).append("\n");
+
+                prevDepartmentId = employee.getDepartmentId();
+                prevEmployee = employee;
+                departmentEmployees.add(employee.toString());
+
+
+
+
+
+                if(!employeeIt.hasNext()){
+//                    map.put(employee.getDepartmentName(), departmentEmployees.toString());
+                    System.out.println(map);
+                    //write to file
+                    writeToFile.saveEmployeesToFile(employee, String.valueOf(line));
+                }
+            }
+
+
+
+
+
+//        SSHClient client = new SSHClient();
+        return true;
+
     }
 }

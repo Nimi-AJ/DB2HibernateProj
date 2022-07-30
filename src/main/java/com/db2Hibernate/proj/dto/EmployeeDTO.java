@@ -17,5 +17,8 @@ public interface EmployeeDTO {
 
     String getDepartmentName();
 
-    public String getJobName();
+    String getJobName();
+
+
+
 }

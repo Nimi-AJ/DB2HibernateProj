@@ -3,6 +3,7 @@ import javax.persistence.*;
 
 @Table(name = "employees")
 @Entity
+//@Data
 public class Employee {
 //    INSERT INTO department(list_name, created_at)
 //    VALUES('Monthly Digest', DEFAULT);
@@ -81,5 +82,7 @@ public class Employee {
     public Department getDepartmentId() {
         return departmentId;
     }
+
+
 }
 

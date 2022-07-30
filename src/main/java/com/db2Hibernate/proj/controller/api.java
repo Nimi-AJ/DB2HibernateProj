@@ -73,6 +73,26 @@ public class api {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @GetMapping("dept/file")
+    public ResponseEntity<Map<String, Object>> saveEmployeesToFileOrderByDepartment( ) throws IOException {
+        Map<String, Object> res = new HashMap<>();
+
+        boolean saved = iEmployeeSvc.saveToFileEmployeesOrderedByDepartment();
+
+        if (saved) {
+            res.put("status", HttpStatus.OK.value());
+            res.put("code", HttpStatus.OK);
+            res.put("message", "File saved");
+        } else{
+            res.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            res.put("code", HttpStatus.INTERNAL_SERVER_ERROR);
+            res.put("message", "Failed To Save File");
+        }
+
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
     @PostMapping("department")
     public ResponseEntity<Map<String, Object>> saveDepartment(@RequestBody ObjectNode objectNode ) {
         Map<String, Object> res = new HashMap<>();

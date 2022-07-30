@@ -1,8 +1,0 @@
-wsam|tate|sam@gmail.com|Software Eng|2000|dep1|1
-gggm|tate|sam@gmail.com|Software Eng|4000|dep1|1
-gggm|tate|sam@gmail.com|Product Manager|4000|dep2|2
-gggm|tate|sam@gmail.com|Product Manager|4000|dep2|2
-gggm|tate|sam@gmail.com|Product Manager|4000|dep2|2
-gggm|tate|sam@gmail.com|Product Manager|4000|dep2|2
-gggm|tate|sam@gmail.com|Quality Analysts|4000|dep3|3
-gggm|tate|sam@gmail.com|Quality Analysts|4000|dep3|3
