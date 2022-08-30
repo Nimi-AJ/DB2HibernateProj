@@ -23,8 +23,8 @@ public class WriteToFile {
         String dirName = prop.SYSTEM_DIRECTORY;
         String fileName = employee.getDepartmentName() + ".txt";
         File dir = new File(dirName);
-
-        File file = new File(dirName, fileName);
+        dir.mkdirs();
+        File file = new File(dir, fileName);
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
 

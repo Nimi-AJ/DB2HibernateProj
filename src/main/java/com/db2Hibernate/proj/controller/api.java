@@ -23,6 +23,21 @@ public class api {
     @Autowired
     IDepartmentSvc iDepartmentSvc;
 
+
+
+    @GetMapping("external/endpoint")
+    public ResponseEntity<Map<String, Object>> externalEndpoint() {
+        Map<String, Object> res = new HashMap<>();
+
+        List<Integer> listOfIds = iEmployeeSvc.returnListOfIds();
+
+        res.put("status", HttpStatus.OK.value());
+        res.put("code", HttpStatus.OK);
+        res.put("data", listOfIds);
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
     @PostMapping("employee")
     public ResponseEntity<Map<String, Object>> saveEmployee(@RequestBody ObjectNode objectNode) {
         Map<String, Object> res = new HashMap<>();

@@ -5,8 +5,12 @@ import com.db2Hibernate.proj.dao.EmployeeDAO;
 import com.db2Hibernate.proj.dto.EmployeeDTO;
 import com.db2Hibernate.proj.entities.Department;
 import com.db2Hibernate.proj.entities.Employee;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+//import com.mashape.unirest.http.Unirest;
+
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,11 +29,77 @@ public class IEmployeeSvc {
     @Autowired
     WriteToFile writeToFile;
 
+    @Autowired
+    RestTemplate restTemplate;
+
+
+    //consumes external endpoint, queries database and writes to file
+    public boolean fromEndpointToFile(){
+        //make endpoint call
+//        final String uri = "http://localhost:8086/external/endpoint";
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//        String result = restTemplate.getForObject(uri, String.class);
+//
+//        System.out.println(result);
+//
+//
+////                HttpResponse<JsonNode> jsonResponse = Unirest.post(EndPoint)
+////                .header("Content-Type", "application/json")
+////                .body(body)
+////                .asJson();
+////
+////        System.out.println(jsonResponse.getBody());
+////
+////        if (jsonResponse.getStatus() != 200){
+////            throw new RuntimeException("An error occurred, request not completed, please retry");
+////        }
+////
+////        JsonNode responseBody = jsonResponse.getBody();
+////        assert responseBody != null;
+////
+////        JSONObject res = responseBody.getObject();
+////        System.out.println(res);
+////
+////        if (!res.getBoolean("IsSuccessful")) {
+////            throw new IllegalStateException("Error creating wallet");
+////        }
+////
+////        JSONObject message = res.getJSONObject("Message");
+////
+////        Map<String, Object> resp = new HashMap<>();
+////        resp.put("key", message.getString("AccountNumber"));
+////        resp.put("name", message.getString("FullName"));
+//
+//        List<Integer> listOfIds = this.returnListOfIds();
+//
+//
+//        for(Integer id : listOfIds){
+//            //make db call
+//            EmployeeDTO employee = employeeDAO.findEmployeeById(id);
+//            //build string
+//            StringBuilder line = new StringBuilder();
+//            line.append(employee.getFirstName()).append("|");
+//            line.append(employee.getLastName()).append("|");
+//            line.append(employee.getEmail()).append("|");
+//            line.append(employee.getSalary()).append("|");
+//            line.append(employee.getDepartmentId()).append("\n");
+//            //write to file
+//            writeToFile.saveEmployeesToFile(employee, String.valueOf(line));
+//
+//        }
+        return true;
+    }
 
     //uses join & native query
     public List<EmployeeDTO> findEmployeesWithSalaryGreaterThan(int salary){
         List<EmployeeDTO> employees = employeeDAO.findEmployeesWithSalaryGreaterThan(salary);
         return employees;
+    }
+
+    public List<Integer> returnListOfIds(){
+        List<Integer> listOfIds = new ArrayList<>(List.of(3, 1, 2));
+        return listOfIds;
     }
 
     public void saveEmployee(String firstName, String lastName, String age, String email, int salary, int departmentId){
@@ -123,8 +193,6 @@ public class IEmployeeSvc {
                 prevDepartmentId = employee.getDepartmentId();
                 prevEmployee = employee;
                 departmentEmployees.add(employee.toString());
-
-
 
 
 

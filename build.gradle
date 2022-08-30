@@ -10,7 +10,8 @@ sourceCompatibility = '11'
 
 repositories {
 	gradlePluginPortal()
-	maven { url = "https://repo.maven.apache.org/maven2" }
+//	maven { url = "https://repo.maven.apache.org/maven2" }
+	mavenCentral()
 }
 
 dependencies {
@@ -18,6 +19,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.ibm.db2:jcc'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.konghq:unirest-java:3.11.09'
+	implementation 'com.konghq:unirest-java:3.11.09:standalone'
+
 // https://mavenlibs.com/maven/dependency/com.hierynomus/sshj
 //	implementation group: 'com.hierynomus', name: 'sshj', version: '0.33.0'
 //	compileOnly 'org.projectlombok:lombok:1.18.24'

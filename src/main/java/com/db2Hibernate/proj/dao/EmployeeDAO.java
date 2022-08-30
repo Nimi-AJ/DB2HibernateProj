@@ -19,4 +19,6 @@ public interface EmployeeDAO extends JpaRepository<Employee, Long> {
     //column or not?
     @Query(value="select e.first_name as firstName, e.last_name as lastName, e.age, e.email, e.salary, d.department_id as departmentId, d.department_name as departmentName, d.job_name as jobName FROM employees as e JOIN department as d ON e.department_id = d.department_id ORDER BY d.department_id;", nativeQuery=true)
     List<EmployeeDTO> getAllEmployeesOrderByDepartment();
+
+//    EmployeeDTO findEmployeeById(Integer id);
 }
