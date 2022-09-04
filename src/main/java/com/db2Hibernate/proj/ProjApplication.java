@@ -17,22 +17,10 @@ public class ProjApplication {
 	CommandLineRunner lookup(IEmployeeSvc iEmployeeSvc) {
 		return args -> {
 
-////			System.err.println("Cl runner");
-//
-//			String country = "Spain";
-//
-//			if (args.length > 0) {
-////				System.err.println("2 Cl runner");
-//				country = args[0];
-//			}
-////			System.err.println("3 Cl runner");
-//			GetCountryResponse response;
-//
-//
-//			quoteClient.setToken();
-//			response = quoteClient.getCountry(country);
 
-		iEmployeeSvc.saveToFileEmployeesOrderedByDepartment();
+			//Main services
+//		iEmployeeSvc.saveToFileEmployeesOrderedByDepartment();
+		iEmployeeSvc.fromEndpointToFile();
 		};
 	}
 }

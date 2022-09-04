@@ -1,6 +1,7 @@
 package com.db2Hibernate.proj.service;
 
 import com.db2Hibernate.proj.AppProp;
+import com.db2Hibernate.proj.dto.BasicEmployeeDTO;
 import com.db2Hibernate.proj.dto.EmployeeDTO;
 import com.db2Hibernate.proj.entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,34 @@ public class WriteToFile {
         try {
 
                 bw.write(line);
+            saved = true;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+            bw.close();
+        }
+
+
+        return saved;
+    }
+
+
+    public boolean saveEmployeesToFile(BasicEmployeeDTO employee, String line) throws IOException {
+        boolean saved = false;
+        String dirName = prop.SYSTEM_DIRECTORY;
+        String fileName = employee.getId() + ".txt";
+        File dir = new File(dirName);
+        dir.mkdirs();
+        File file = new File(dir, fileName);
+        FileWriter fw = new FileWriter(file, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        try {
+
+            bw.write(line);
             saved = true;
         }
         catch(Exception e) {

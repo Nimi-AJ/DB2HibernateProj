@@ -1,5 +1,6 @@
 package com.db2Hibernate.proj.controller;
 
+import com.db2Hibernate.proj.JSONModels.Details;
 import com.db2Hibernate.proj.dto.EmployeeDTO;
 import com.db2Hibernate.proj.service.IDepartmentSvc;
 import com.db2Hibernate.proj.service.IEmployeeSvc;
@@ -25,11 +26,24 @@ public class api {
 
 
 
-    @GetMapping("external/endpoint")
-    public ResponseEntity<Map<String, Object>> externalEndpoint() {
+    @GetMapping("external/endpoint/id")
+    public ResponseEntity<Map<String, Object>> getIdFromEndpoint() {
         Map<String, Object> res = new HashMap<>();
 
-        List<Integer> listOfIds = iEmployeeSvc.returnListOfIds();
+        List<Details> listOfIds = iEmployeeSvc.returnListOfIds();
+
+        res.put("status", HttpStatus.OK.value());
+        res.put("code", HttpStatus.OK);
+        res.put("data", listOfIds);
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @GetMapping("external/endpoint/lastName")
+    public ResponseEntity<Map<String, Object>> getLastNameFromEndpoint() {
+        Map<String, Object> res = new HashMap<>();
+
+        List<Details> listOfIds = iEmployeeSvc.returnListOfIds();
 
         res.put("status", HttpStatus.OK.value());
         res.put("code", HttpStatus.OK);

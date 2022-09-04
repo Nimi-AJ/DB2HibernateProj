@@ -2,6 +2,7 @@ package com.db2Hibernate.proj.dto;
 
 import com.db2Hibernate.proj.entities.Department;
 
+
 public interface EmployeeDTO {
     String getFirstName();
 
@@ -12,6 +13,7 @@ public interface EmployeeDTO {
     String getEmail();
 
     Integer getSalary();
+
 
     Integer getDepartmentId();
 
